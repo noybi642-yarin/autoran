@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────
+   AUTORAN design tokens
+   Deep green accents · white & warm off-white surfaces · ink text.
+   All text/background pairs below meet WCAG 2.2 AA (4.5:1) or better.
+   ────────────────────────────────────────────────────────────── */
+@theme {
+  /* Surfaces */
+  --color-canvas: #faf8f4; /* warm off-white page background */
+  --color-sand: #f2eee6; /* secondary warm surface */
+  --color-surface: #ffffff;
+  --color-line: #e3ddd2;
+  --color-line-strong: #cfc7b8;
+
+  /* Text */
+  --color-ink: #0f1a15; /* 17.4:1 on canvas */
+  --color-ink-muted: #4b5751; /* 7.1:1 on canvas */
+  --color-ink-subtle: #66706b; /* 4.9:1 on canvas — small print only */
+
+  /* Deep green scale */
+  --color-forest-50: #eef5f1;
+  --color-forest-100: #dceae2;
+  --color-forest-200: #b6d3c3;
+  --color-forest-300: #8ab8a0;
+  --color-forest-500: #2d8a68;
+  --color-forest-600: #157a5d;
+  --color-forest-700: #0f6149; /* primary action — 7.4:1 with white */
+  --color-forest-800: #0b4c3a;
+  --color-forest-900: #083a2c;
+  --color-forest-950: #052219;
+
+  /* Focus ring */
+  --color-focus: #157a5d;
+  --color-focus-on-dark: #9fe3c4;
+
+  /* Brand atmospheres (accents only — never body text on white unless noted) */
+  --color-brand-hyundai: #0b2a5b;
+  --color-brand-hyundai-soft: #e9eef6;
+  --color-brand-mitsubishi: #a3162a;
+  --color-brand-mitsubishi-soft: #f5ecea;
+  --color-brand-jaecoo: #1d3a2f;
+  --color-brand-jaecoo-soft: #e6ece7;
+  --color-brand-omoda: #2b2547;
+  --color-brand-omoda-soft: #ebe9f3;
+  --color-brand-ora: #8a5d3b;
+  --color-brand-ora-soft: #f6eee5;
+
+  /* Typography */
+  --font-sans: var(--font-heebo), "Heebo", system-ui, "Segoe UI", Arial, sans-serif;
+
+  --text-display: clamp(2.5rem, 1.6rem + 4.2vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.02em;
+  --text-headline: clamp(1.875rem, 1.4rem + 2vw, 3rem);
+  --text-headline--line-height: 1.1;
+  --text-headline--letter-spacing: -0.015em;
+  --text-title: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --text-title--line-height: 1.25;
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  /* Shape */
+  --radius-control: 0.625rem;
+  --radius-card: 1rem;
+  --radius-panel: 1.5rem;
+
+  /* Elevation — kept deliberately minimal */
+  --shadow-card: 0 1px 2px rgb(15 26 21 / 0.04), 0 4px 16px -8px rgb(15 26 21 / 0.08);
+  --shadow-card-hover: 0 2px 4px rgb(15 26 21 / 0.05), 0 16px 32px -16px rgb(15 26 21 / 0.18);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-rise: rise 0.8s var(--ease-out-soft) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --header-h: 4.5rem;
+  }
+  @media (min-width: 64rem) {
+    :root {
+      --header-h: 5rem;
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--header-h) + 1rem); /* sticky header offset */
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-forest-200);
+    color: var(--color-forest-950);
+  }
+
+  /* Visible, consistent keyboard focus everywhere. */
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-focus-on-dark);
+  }
+
+  /* Latin brand/model names inside Hebrew text keep their own direction. */
+  [lang="en"] {
+    unicode-bidi: isolate;
+  }
+
+  /* Phone numbers must never be reordered by the bidi algorithm. */
+  .ltr-nums {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
