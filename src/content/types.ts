@@ -11,13 +11,10 @@ export type Verification = "verified" | "pending";
 
 export type BrandSlug = "hyundai" | "mitsubishi" | "jaecoo" | "omoda" | "ora";
 
+/** An image file that exists in /public, resolved at build time. */
 export interface ImageAsset {
   src: string;
   alt: string;
-  width: number;
-  height: number;
-  /** Who supplied/authorised the image (e.g. importer media kit). */
-  credit?: string;
 }
 
 export interface Brand {
@@ -28,13 +25,8 @@ export interface Brand {
   nameHe: string;
   /** Short Hebrew positioning line. Marketing copy — awaiting client approval. */
   tagline: string;
-  /** Visual atmosphere tokens for the brand experience (see globals.css). */
-  theme: {
-    /** CSS custom property suffix, e.g. "hyundai" -> var(--brand-hyundai) */
-    token: BrandSlug;
-  };
-  /** Official brand logo, only when an authorised asset is supplied. */
-  logo?: ImageAsset;
+  /** Whether text on the brand tile sits on a dark or light atmosphere. */
+  tileTone: "dark" | "light";
 }
 
 export interface Vehicle {
@@ -42,11 +34,13 @@ export interface Vehicle {
   brand: BrandSlug;
   /** Model name exactly as marketed, e.g. "Outlander", "J7". */
   model: string;
+  /** Full display name when it is not simply "<Brand> <model>". */
+  displayName?: string;
   verification: Verification;
+  /** One-line positioning text (from the approved homepage design). No specs. */
+  tagline?: string;
   /** Short, accurate Hebrew introduction. `null` until verified copy is supplied. */
   intro: string | null;
-  /** Authorised official imagery. Empty until supplied. */
-  images: ImageAsset[];
   /** Location ids where this model is sold. Empty until verified. */
   soldAt: string[];
 }

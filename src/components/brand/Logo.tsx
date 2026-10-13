@@ -1,44 +1,43 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getSiteLogo } from "@/content/assets";
 import { site } from "@/content/site";
 import { cx } from "@/lib/cx";
 
 /**
- * AUTORAN logo.
- * Renders the ORIGINAL supplied logo from `site.logo`. Until that asset is
- * provided, shows the business name in plain type inside a dashed frame so
- * it is obvious the real logo is still missing — this is not a redesign.
+ * AUTORAN logo — the ORIGINAL supplied file only (see docs/ASSETS.md).
+ * The logo is never recreated in type or CSS. Until the file is supplied this
+ * renders an empty, explicitly labelled slot of the same footprint.
  */
 export function Logo({ tone = "light", className }: { tone?: "light" | "dark"; className?: string }) {
-  const dark = tone === "dark";
+  const logo = getSiteLogo(tone === "dark");
   return (
     <Link
       href="/"
-      aria-label={`${site.name} ${site.nameLatin} — לדף הבית`}
-      className={cx("inline-flex shrink-0 items-center", className)}
+      aria-label={`${site.name} — לדף הבית`}
+      className={cx("relative block h-11 w-[9.5rem] shrink-0 sm:h-12 sm:w-[10.5rem]", className)}
     >
-      {site.logo ? (
+      {logo ? (
         <Image
-          src={site.logo.src}
+          src={logo.src}
           alt=""
-          width={site.logo.width}
-          height={site.logo.height}
+          fill
           priority
-          className="h-9 w-auto sm:h-10"
+          sizes="168px"
+          unoptimized={logo.src.endsWith(".svg")}
+          className="object-contain object-right"
         />
       ) : (
         <span
-          data-placeholder="logo"
-          title="הלוגו המקורי של אוטורן ממתין להעלאה"
+          data-missing-asset="autoran-logo"
           className={cx(
-            "flex items-baseline gap-2 rounded-md border border-dashed px-2.5 py-1",
-            dark ? "border-white/35 text-white" : "border-line-strong text-forest-900",
+            "flex h-full w-full items-center justify-center rounded-md border border-dashed text-center text-[0.6875rem] leading-tight font-medium",
+            tone === "dark" ? "border-white/35 text-white/75" : "border-line-strong text-ink-subtle",
           )}
         >
-          <span className="text-xl font-extrabold leading-none">{site.name}</span>
-          <span lang="en" className="text-[0.6875rem] font-semibold tracking-[0.18em] opacity-80">
-            {site.nameLatin}
-          </span>
+          לוגו אוטורן
+          <br />
+          ממתין לקובץ המקורי
         </span>
       )}
     </Link>

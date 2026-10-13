@@ -1,4 +1,4 @@
-import type { ImageAsset, NavItem } from "./types";
+import type { NavItem } from "./types";
 
 export const site = {
   name: "אוטורן",
@@ -10,32 +10,40 @@ export const site = {
   /** Independence notice — AUTORAN is not the importer's corporate website. */
   independenceNotice:
     "אוטורן היא סוכנות רכב עצמאית. שמות המותגים, הדגמים והסימנים המסחריים שייכים לבעליהם.",
-  /**
-   * Original AUTORAN logo. Set once the supplied asset is placed in
-   * /public/brand/. Until then <Logo /> renders a clearly marked placeholder.
-   */
-  logo: null as ImageAsset | null,
 } as const;
 
-/** Desktop header — kept short on purpose. */
-export const primaryNav: NavItem[] = [
-  { label: "מותגים ודגמים", href: "/brands" },
+export interface NavEntry extends NavItem {
+  /** Optional sub-menu (desktop dropdown / mobile nested list). */
+  children?: NavItem[];
+}
+
+/** Header navigation, as specified for the approved design. */
+export const primaryNav: NavEntry[] = [
+  {
+    label: "הרכבים שלנו",
+    href: "/brands",
+    children: [
+      { label: "Hyundai", href: "/brands/hyundai" },
+      { label: "Mitsubishi", href: "/brands/mitsubishi" },
+      { label: "JAECOO", href: "/brands/jaecoo" },
+      { label: "OMODA", href: "/brands/omoda" },
+      { label: "ORA", href: "/brands/ora" },
+    ],
+  },
   { label: "מימון וליסינג", href: "/financing" },
-  { label: "טרייד־אין", href: "/trade-in" },
-  { label: "מרכז שירות", href: "/authorized-service" },
+  { label: "טרייד אין", href: "/trade-in" },
+  { label: "מרכז שירות מורשה", href: "/authorized-service" },
   { label: "סניפים", href: "/locations" },
-];
-
-/** Shown in the mobile menu and footer in addition to the primary nav. */
-export const secondaryNav: NavItem[] = [
   { label: "אודות", href: "/about" },
-  { label: "צרו קשר", href: "/contact" },
 ];
 
-export const testDriveCta: NavItem = { label: "נסיעת מבחן", href: "/test-drive" };
+/** Footer-only links. */
+export const secondaryNav: NavItem[] = [{ label: "צרו קשר", href: "/contact" }];
 
-/** The single vehicle featured in the homepage hero. Awaiting client approval. */
-export const heroVehicleSlug = "jaecoo-j7";
+export const testDriveCta: NavItem = { label: "קביעת נסיעת מבחן", href: "/test-drive" };
 
-/** Three featured vehicles on the homepage. Awaiting client approval. */
-export const featuredVehicleSlugs = ["jaecoo-j7", "mitsubishi-outlander", "omoda-9"];
+/** Hero carousel — one vehicle per slide. Order as approved. */
+export const heroVehicleSlugs = ["hyundai-tucson", "jaecoo-7", "ora-5"];
+
+/** "הדגמים הפופולריים" — three featured vehicles, as approved. */
+export const featuredVehicleSlugs = ["jaecoo-7", "hyundai-tucson", "ora-5"];

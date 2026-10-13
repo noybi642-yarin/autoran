@@ -12,13 +12,20 @@ directories (October 2026).
 
 ## Assets needed from AUTORAN
 
-| Item | Where it goes | Current state |
-| --- | --- | --- |
-| **Original AUTORAN logo** (SVG preferred, or PNG ≥ 2× size) | `public/brand/` → `site.logo` in `src/content/site.ts` | Business name in a dashed placeholder frame |
-| Favicon / app icon from the logo | `src/app/icon.png` | None |
-| Authorised vehicle photography (hero + 3 featured, then full galleries) | `public/vehicles/<slug>/` → `images` in `src/content/vehicles.ts` | Generic line drawing + "ממתינה לאישור" badge |
-| Official brand logos (optional) | `logo` in `src/content/brands.ts` | Brand names set as text |
-| "Approved minimal homepage design" reference | — | **Not supplied.** Homepage follows the written brief; please share the reference so it can be matched closely |
+The full spec and drop-in paths are in [`ASSETS.md`](ASSETS.md).
+
+| Item | State |
+| --- | --- |
+| **Original AUTORAN logo** (SVG) | **Missing.** The only copy is inside the mockup, about 170 px wide, which is too small to use |
+| Hero photos: Tucson, JAECOO 7, ORA 5 | Missing. Labelled placeholders are shown |
+| Card photos for the same three models | Missing. The hero photo is used if a card photo is absent |
+| Five official brand logos plus five brand tile photos | Missing. Brand names are shown as text over a colour background |
+| Favicon from the logo (`src/app/icon.png`) | Missing |
+| Approved homepage design | ✅ Received: `docs/design/homepage-reference.png` |
+
+| Asset | Source / licence |
+| --- | --- |
+| (none yet) | |
 
 ## Locations (shown on the homepage, `verification: "pending"`)
 
@@ -39,39 +46,61 @@ offers or availability.
 
 | Model | Needs |
 | --- | --- |
+| Hyundai Tucson | Confirm it is in the current Israeli line-up. Then intro copy, highlights, specs, images |
 | Mitsubishi Outlander | Intro copy, highlights, specs, images |
 | JAECOO J5 / J7 / J8 | Confirm each is in the current Israeli catalogue, then the items above |
 | OMODA 7 / OMODA 9 | Same |
 | ORA 5 | Same. Do not label it "electric" unless confirmed |
 | Hyundai line-up | Not entered yet. To be populated from verified current Israeli-market data in Phase 1C |
 
-Homepage choices to approve:
+Homepage selections (from the approved design), set in `src/content/site.ts`:
 
-- **Hero vehicle:** JAECOO J7
-- **Featured vehicles:** JAECOO J7, Mitsubishi Outlander, OMODA 9
+- **Hero carousel:** Hyundai Tucson, JAECOO 7, ORA 5
+- **הדגמים הפופולריים:** JAECOO 7, Hyundai Tucson, ORA 5
 
-These are set in `src/content/site.ts`.
+Naming question: the design uses "JAECOO 7", and the earlier brief used "J5 /
+J7 / J8". Please confirm the official Israeli model names.
 
-## Copy written for this build (needs approval)
+## Copy (from the approved design; spelling corrected where needed)
 
-- Hero: "הרכב הבא שלכם מתחיל כאן". The sub-line says there is personal guidance
-  in the showroom and a service centre "שממשיך איתכם גם אחרי המסירה".
-- Brand taglines in `src/content/brands.ts`.
-- Financing, leasing and trade-in summaries in
-  `src/components/home/PurchaseOptions.tsx`. They are deliberately general and
-  mention no rates, terms or approvals. The private-leasing / Extra Lease
-  product description needs approved wording.
-- Financing disclaimer: "המידע באתר הוא כללי ואינו מהווה הצעה…". Legal should
-  review it.
-- Independence notice in the footer: "אוטורן היא סוכנות רכב עצמאית…".
+- Hero: "הרכב הבא שלכם מתחיל כאן" / "מגוון מותגים, דגמים ופתרונות רכישה במקום אחד."
+- Brand taglines in `src/content/brands.ts`. Two lines in the mockup were
+  garbled, so I corrected them:
+  - Mitsubishi: "אמינות שבילה קדימה" became "אמינות שמובילה קדימה".
+  - OMODA: "עיצוב הדשנות" became "עיצוב וחדשנות".
+  - JAECOO: "לאנשים שאוהבים יותר" became "לאלה שמחפשים יותר".
+  Please approve these.
+- Model lines: Tucson "עוצמה בכל דרך", JAECOO 7 "SUV ללא גבולות", ORA 5
+  "סטייל לכל דרך".
+- Purchase options: the three short lines from the design. There are no rates
+  or terms.
+- Locations subtitle: "מוזמנים להגיע, להתרשם ולקבל שירות אישי." This softens
+  the mockup's "השירות הטוב ביותר", which is a superlative claim.
+- Footer independence notice: "אוטורן היא סוכנות רכב עצמאית…".
+
+## Deliberately not copied from the mockup
+
+- **Two "טרייד אין" branches** (רעננה, הנופר 6 and הרצליה): there is no
+  source for these. Please confirm whether they exist and send the details.
+- **Brand lists per branch** ("יונדאי, ג'אקו ואומודה" in Herzliya, "מיצובישי
+  ו־ORA" in Ra'anana): not verified yet.
+- **Opening hours in the footer** (08:00–18:00 / 08:00–13:00): these don't
+  match the sources found, so they're omitted until you confirm them.
+- **Social-media icons**: no accounts have been confirmed. Please send the URLs
+  if you want them shown.
+- **"מימון וליסינג" dropdown**: there are no confirmed sub-pages yet, so it's a
+  plain link for now.
 
 ## Legal pages (infrastructure ready, content needed)
 
-The routes are registered in `src/content/legal.ts` (`published: false`):
+The footer links to all four pages, as the design shows. The pages themselves
+return 404 until content is supplied. They are listed in
+`src/content/legal.ts`:
 
 - **Accessibility statement** (`/accessibility`). Israeli regulations require
   one. It needs the accessibility coordinator's name and contact details and
   the physical accessibility details of each branch.
 - **Privacy policy** (`/privacy`). It is needed before the forms go live in
   Phase 1F.
+- **Terms of use** (`/terms`).
 - **Cookie policy** (`/cookies`).

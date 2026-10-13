@@ -2,34 +2,37 @@ import { Phone } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { Container } from "@/components/ui/Container";
-import { brands } from "@/content/brands";
-import { publishedLegalPages } from "@/content/legal";
+import { legalPages } from "@/content/legal";
 import { formatAddress, locations, telHref } from "@/content/locations";
 import { primaryNav, secondaryNav, site, testDriveCta } from "@/content/site";
 
-const linkClass =
-  "inline-flex min-h-9 items-center text-forest-100 transition-colors hover:text-white";
+const quickLinks = [
+  ...primaryNav.map(({ label, href }) => ({ label, href })),
+  testDriveCta,
+  ...secondaryNav,
+];
 
+const linkClass = "inline-flex min-h-9 items-center text-forest-100 transition-colors hover:text-white";
+
+/** Business hours and social links are intentionally absent until verified. */
 export function Footer() {
   return (
-    <footer className="on-dark bg-forest-950 text-forest-100">
-      <Container className="py-14 lg:py-20">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12">
-          <div className="col-span-2 lg:col-span-4">
+    <footer className="on-dark bg-forest-900 text-forest-100">
+      <Container className="py-10 lg:py-12">
+        <div className="grid gap-10 md:grid-cols-12">
+          <div className="md:col-span-4">
             <Logo tone="dark" />
-            <p className="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-forest-100">
-              סוכנות רכב רב־מותגית: יונדאי, מיצובישי, <span lang="en">JAECOO</span>,{" "}
-              <span lang="en">OMODA</span> ו־<span lang="en">ORA</span>. אולמות תצוגה ברעננה
-              ובהרצליה ומרכז שירות מורשה ברעננה.
+            <p className="mt-4 max-w-xs text-sm leading-relaxed">
+              סוכנות רכב רב־מותגית — אולמות תצוגה ברעננה ובהרצליה ומרכז שירות מורשה ברעננה.
             </p>
           </div>
 
-          <nav aria-labelledby="footer-nav" className="lg:col-span-2">
-            <h2 id="footer-nav" className="text-sm font-semibold text-white">
-              ניווט
+          <nav aria-labelledby="footer-nav" className="md:col-span-4">
+            <h2 id="footer-nav" className="font-semibold text-white">
+              קישורים מהירים
             </h2>
-            <ul className="mt-4 space-y-1">
-              {[...primaryNav, testDriveCta, ...secondaryNav].map((item) => (
+            <ul className="mt-3 grid grid-cols-2 gap-x-6">
+              {quickLinks.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className={linkClass}>
                     {item.label}
@@ -39,33 +42,19 @@ export function Footer() {
             </ul>
           </nav>
 
-          <nav aria-labelledby="footer-brands" className="lg:col-span-2">
-            <h2 id="footer-brands" className="text-sm font-semibold text-white">
-              מותגים
-            </h2>
-            <ul className="mt-4 space-y-1">
-              {brands.map((brand) => (
-                <li key={brand.slug}>
-                  <Link href={`/brands/${brand.slug}`} className={linkClass} lang="en">
-                    {brand.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="col-span-2 lg:col-span-4">
-            <h2 className="text-sm font-semibold text-white">יצירת קשר</h2>
-            <ul className="mt-4 space-y-5">
+          <div className="md:col-span-4">
+            <h2 className="font-semibold text-white">יצירת קשר</h2>
+            <ul className="mt-3 space-y-3">
               {locations.map((loc) => (
-                <li key={loc.id}>
-                  <p className="font-semibold text-white">{loc.name}</p>
-                  <p className="mt-1 text-[0.9375rem]">{formatAddress(loc)}</p>
+                <li key={loc.id} className="text-sm">
+                  <p className="font-medium text-white">{loc.name}</p>
+                  <p>{formatAddress(loc)}</p>
                   <a
                     href={telHref(loc.phone)}
-                    className="mt-1 inline-flex min-h-9 items-center gap-2 text-[0.9375rem] font-medium text-white hover:underline underline-offset-4"
+                    className="inline-flex min-h-9 items-center gap-2 font-medium text-white underline-offset-4 hover:underline"
                   >
                     <Phone aria-hidden="true" className="size-4 text-forest-300" />
+                    <span className="sr-only">טלפון {loc.name}: </span>
                     <span className="ltr-nums">{loc.phone}</span>
                   </a>
                 </li>
@@ -74,22 +63,20 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-forest-200 md:flex-row md:items-center md:justify-between">
-          <p>{site.independenceNotice}</p>
-          {publishedLegalPages.length > 0 && (
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
-              {publishedLegalPages.map((page) => (
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/15 pt-6 text-sm text-forest-200 lg:flex-row lg:items-center lg:justify-between">
+          <nav aria-label="מידע משפטי">
+            <ul className="flex flex-wrap gap-x-5 gap-y-1">
+              {legalPages.map((page) => (
                 <li key={page.href}>
-                  <Link href={page.href} className="hover:text-white">
+                  <Link href={page.href} className="inline-flex min-h-9 items-center hover:text-white">
                     {page.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          )}
-          <p>
-            © <span lang="en">{site.nameLatin}</span>. כל הזכויות שמורות.
-          </p>
+          </nav>
+          <p>{site.independenceNotice}</p>
+          <p>© {site.name}. כל הזכויות שמורות.</p>
         </div>
       </Container>
     </footer>

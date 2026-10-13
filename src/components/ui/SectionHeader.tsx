@@ -1,63 +1,36 @@
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { cx } from "@/lib/cx";
 
 interface SectionHeaderProps {
   id: string;
-  eyebrow?: string;
   title: ReactNode;
   description?: ReactNode;
-  action?: ReactNode;
-  tone?: "light" | "dark";
+  /** Optional "see all" link shown at the end of the row. */
+  link?: { href: string; label: string };
   className?: string;
 }
 
-/** Consistent section heading. `id` is referenced by the section's aria-labelledby. */
-export function SectionHeader({
-  id,
-  eyebrow,
-  title,
-  description,
-  action,
-  tone = "light",
-  className,
-}: SectionHeaderProps) {
-  const dark = tone === "dark";
+/** Title on the right, optional "see all" link on the left — as in the approved design. */
+export function SectionHeader({ id, title, description, link, className }: SectionHeaderProps) {
   return (
-    <div
-      className={cx(
-        "flex flex-col gap-6 md:flex-row md:items-end md:justify-between",
-        className,
-      )}
-    >
-      <div className="max-w-2xl">
-        {eyebrow && (
-          <p
-            className={cx(
-              "mb-3 text-sm font-semibold tracking-wide",
-              dark ? "text-forest-200" : "text-forest-700",
-            )}
-          >
-            {eyebrow}
-          </p>
-        )}
-        <h2
-          id={id}
-          className={cx("text-headline font-bold text-balance", dark ? "text-white" : "text-ink")}
-        >
+    <div className={cx("flex items-end justify-between gap-4", className)}>
+      <div>
+        <h2 id={id} className="text-headline font-extrabold text-balance text-forest-950">
           {title}
         </h2>
-        {description && (
-          <p
-            className={cx(
-              "mt-4 text-lead text-pretty",
-              dark ? "text-forest-100" : "text-ink-muted",
-            )}
-          >
-            {description}
-          </p>
-        )}
+        {description && <p className="mt-1.5 text-ink-muted">{description}</p>}
       </div>
-      {action && <div className="shrink-0">{action}</div>}
+      {link && (
+        <Link
+          href={link.href}
+          className="inline-flex min-h-11 shrink-0 items-center gap-1.5 text-[0.9375rem] font-semibold text-forest-700 underline-offset-4 hover:underline"
+        >
+          {link.label}
+          <ArrowLeft aria-hidden="true" className="size-4" />
+        </Link>
+      )}
     </div>
   );
 }

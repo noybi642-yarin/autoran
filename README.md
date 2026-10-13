@@ -47,11 +47,12 @@ src/
     brands.ts             Five brands + taglines + theme tokens
     vehicles.ts           Vehicle catalog (no specs until verified)
     locations.ts          Showrooms + service centre, link helpers
-    legal.ts              Future accessibility / privacy / cookie pages
+    legal.ts              Accessibility / privacy / terms / cookie pages
+    assets.ts             Asset path conventions + build-time resolver
   components/
-    layout/               Header, MobileMenu, NavLink, Footer, SkipLink
-    home/                 Homepage sections
-    ui/                   Container, ButtonLink, SectionHeader, MediaFrame…
+    layout/               Header, NavDropdown, MobileMenu, NavLink, Footer, SkipLink
+    home/                 Homepage sections (hero carousel, brands, models…)
+    ui/                   Container, ButtonLink, SectionHeader, Photo
     brand/Logo.tsx        Original logo slot
     seo/JsonLd.tsx        Safe JSON-LD script
   lib/                    Small helpers (cx, structured data)
@@ -62,12 +63,13 @@ src/
 - **Verification status.** Every vehicle and location has a `verification`
   field. Unverified opening hours and brand-per-location lists are stored but
   not rendered.
-- **No invented imagery.** `MediaFrame` renders authorised photography when an
-  `ImageAsset` is supplied. Otherwise it shows a generic line drawing and a
-  visible “תמונה רשמית ממתינה לאישור” badge. The drawing is not any real model.
-- **Original logo only.** Put the supplied file in `public/brand/` and set
-  `site.logo` in `src/content/site.ts`. Until then the header shows the
-  business name in a dashed “placeholder” frame.
+- **Drop-in assets.** Images and logos are resolved from `/public` by
+  convention at build time (`src/content/assets.ts`), so adding a file needs
+  no code change. Paths and specs are in [`docs/ASSETS.md`](docs/ASSETS.md).
+- **No invented imagery.** A missing photo shows a plain, labelled placeholder.
+  No illustration, stock image or AI image is ever substituted.
+- **Original logo only.** The logo is never recreated in type or CSS. Until
+  the file exists, the header shows an empty labelled slot.
 - **No financial terms.** Financing copy is general and carries a disclaimer.
 
 ### Environment variables
@@ -86,7 +88,7 @@ Google Sheets credentials arrive in Phase 1F (server-side only).
 | Phase | Scope | Status |
 | --- | --- | --- |
 | 1A | Architecture, tokens, typography, RTL, header, footer | ✅ Ready for review |
-| 1B | Homepage | ✅ Ready for review |
+| 1B | Homepage, rebuilt to the approved design (`docs/design/`) | ✅ Ready for review. Waiting on assets |
 | 1C | Brand pages | Not started — awaits homepage approval |
 | 1D | Vehicle detail template | Not started |
 | 1E | Financing, trade-in, test drive, service, locations pages | Not started |

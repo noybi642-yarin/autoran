@@ -2,11 +2,12 @@
 
 import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import type { NavEntry } from "@/content/site";
 import type { NavItem } from "@/content/types";
 import { NavLink } from "./NavLink";
 
 interface MobileMenuProps {
-  items: NavItem[];
+  items: NavEntry[];
   cta: NavItem;
 }
 
@@ -30,7 +31,7 @@ export function MobileMenu({ items, cta }: MobileMenuProps) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close(true);
     };
-    const mq = window.matchMedia("(min-width: 64rem)");
+    const mq = window.matchMedia("(min-width: 80rem)");
     const onResize = () => mq.matches && close();
     document.addEventListener("keydown", onKey);
     mq.addEventListener("change", onResize);
@@ -43,7 +44,7 @@ export function MobileMenu({ items, cta }: MobileMenuProps) {
   }, [open, close]);
 
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <button
         ref={buttonRef}
         type="button"
@@ -72,13 +73,29 @@ export function MobileMenu({ items, cta }: MobileMenuProps) {
                 >
                   {item.label}
                 </NavLink>
+                {item.children && (
+                  <ul className="-mt-2 mb-3 grid grid-cols-2 gap-x-4 ps-4">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <NavLink
+                          href={child.href}
+                          onClick={() => close()}
+                          lang="en"
+                          className="flex min-h-11 items-center text-base text-ink-muted aria-[current=page]:text-forest-700"
+                        >
+                          {child.label}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
           <NavLink
             href={cta.href}
             onClick={() => close()}
-            className="mt-8 flex min-h-13 min-[380px]:hidden items-center justify-center rounded-[var(--radius-control)] bg-forest-700 text-base font-semibold text-white hover:bg-forest-800"
+            className="mt-8 flex min-h-13 min-[400px]:hidden items-center justify-center rounded-[var(--radius-control)] bg-forest-700 text-base font-semibold text-white hover:bg-forest-800"
           >
             {cta.label}
           </NavLink>

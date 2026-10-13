@@ -1,13 +1,13 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
-import { MediaFrame } from "@/components/ui/MediaFrame";
+import { Photo } from "@/components/ui/Photo";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { getVehicleImage } from "@/content/assets";
 import { getBrand } from "@/content/brands";
 import { featuredVehicleSlugs } from "@/content/site";
 import type { Vehicle } from "@/content/types";
-import { getVehicle } from "@/content/vehicles";
+import { getVehicle, vehicleName } from "@/content/vehicles";
 
 export function FeaturedVehicles() {
   const featured = featuredVehicleSlugs
@@ -15,58 +15,45 @@ export function FeaturedVehicles() {
     .filter((v): v is Vehicle => Boolean(v));
 
   return (
-    <section aria-labelledby="featured-title" className="bg-surface py-16 lg:py-24">
+    <section aria-labelledby="featured-title" className="bg-white pb-12 lg:pb-16">
       <Container>
         <SectionHeader
           id="featured-title"
-          eyebrow="דגמים נבחרים"
-          title="מה חדש באולם התצוגה"
-          action={
-            <ButtonLink href="/brands" variant="ghost" className="px-0">
-              לכל הדגמים
-              <ArrowLeft aria-hidden="true" className="size-4" />
-            </ButtonLink>
-          }
+          title="הדגמים הפופולריים"
+          link={{ href: "/brands", label: "לכל הדגמים" }}
         />
 
-        <ul className="mt-10 grid gap-6 md:grid-cols-3 lg:mt-12 lg:gap-8">
+        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:mt-7 lg:grid-cols-3 lg:gap-5">
           {featured.map((vehicle) => {
             const brand = getBrand(vehicle.brand);
-            const name = `${brand.name} ${vehicle.model}`;
+            const name = vehicleName(vehicle, brand.name);
             return (
               <li key={vehicle.slug}>
-                <article className="group relative flex h-full flex-col">
-                  <MediaFrame
-                    image={vehicle.images[0]}
-                    placeholderLabel={name}
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    tone="light"
-                    className="aspect-[16/11] rounded-[var(--radius-card)]"
-                    illustrationClassName="w-[82%]"
-                  />
-                  <div className="flex flex-1 flex-col pt-5">
-                    <p lang="en" className="text-sm font-semibold tracking-[0.16em] text-ink-muted">
-                      {brand.name.toUpperCase()}
-                    </p>
-                    <h3 className="mt-1 text-title font-bold">
+                <article className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line/80 bg-white shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)]">
+                  <div className="relative aspect-[2/1] overflow-hidden">
+                    <Photo
+                      image={getVehicleImage(vehicle.slug, "card", name)}
+                      placeholderLabel={name}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col px-5 pt-4 pb-5">
+                    <h3 className="text-title font-extrabold tracking-wide uppercase">
                       <Link
                         href={`/cars/${vehicle.slug}`}
-                        className="after:absolute after:inset-0 after:rounded-[var(--radius-card)] focus-visible:outline-none group-has-[:focus-visible]:after:outline-3 group-has-[:focus-visible]:after:outline-offset-4 group-has-[:focus-visible]:after:outline-focus"
+                        lang="en"
+                        className="after:absolute after:inset-0 focus-visible:outline-none group-has-[:focus-visible]:after:rounded-[var(--radius-card)] group-has-[:focus-visible]:after:outline-3 group-has-[:focus-visible]:after:outline-offset-2 group-has-[:focus-visible]:after:outline-focus"
                       >
-                        <span lang="en">
-                          <span className="sr-only">{brand.name} </span>
-                          {vehicle.model}
-                        </span>
+                        {name}
                       </Link>
                     </h3>
-                    <p className="mt-2 text-[0.9375rem] text-ink-muted">
-                      {vehicle.intro ?? "תיאור הדגם והמפרט יפורסמו לאחר אימות מול היבואן."}
-                    </p>
+                    {vehicle.tagline && <p className="mt-0.5 text-ink-muted">{vehicle.tagline}</p>}
                     <span
                       aria-hidden="true"
-                      className="mt-5 inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-forest-800"
+                      className="mt-3 inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-forest-700"
                     >
-                      לפרטי הדגם
+                      לפרטים
                       <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
                     </span>
                   </div>

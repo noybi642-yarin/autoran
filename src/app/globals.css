@@ -11,6 +11,7 @@
   --color-sand: #f2eee6; /* secondary warm surface */
   --color-surface: #ffffff;
   --color-line: #e3ddd2;
+  --color-placeholder: #e7e4de; /* neutral photo slot awaiting an asset */
   --color-line-strong: #cfc7b8;
 
   /* Text */
@@ -49,13 +50,13 @@
   /* Typography */
   --font-sans: var(--font-heebo), "Heebo", system-ui, "Segoe UI", Arial, sans-serif;
 
-  --text-display: clamp(2.5rem, 1.6rem + 4.2vw, 5rem);
-  --text-display--line-height: 1.02;
+  --text-display: clamp(2.375rem, 1.5rem + 3.4vw, 4.5rem);
+  --text-display--line-height: 1.04;
   --text-display--letter-spacing: -0.02em;
-  --text-headline: clamp(1.875rem, 1.4rem + 2vw, 3rem);
+  --text-headline: clamp(1.625rem, 1.3rem + 1.1vw, 2.25rem);
   --text-headline--line-height: 1.1;
   --text-headline--letter-spacing: -0.015em;
-  --text-title: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --text-title: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
   --text-title--line-height: 1.25;
   --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
   --text-lead--line-height: 1.6;
@@ -134,6 +135,48 @@
   .ltr-nums {
     direction: ltr;
     unicode-bidi: isolate;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Brand tile atmospheres. Shown behind the brand photo; when no photo is
+   supplied yet they carry the tile on their own. Colour only — no imagery.
+   ────────────────────────────────────────────────────────────── */
+@layer components {
+  .atmosphere-hyundai {
+    background: linear-gradient(180deg, #0e2a52 0%, #2a5286 52%, #9fb6d1 100%);
+  }
+  .atmosphere-mitsubishi {
+    background: linear-gradient(180deg, #121214 0%, #2b2b2f 55%, #5a1018 100%);
+  }
+  .atmosphere-jaecoo {
+    background: linear-gradient(180deg, #11261e 0%, #24463a 55%, #6d8a73 100%);
+  }
+  .atmosphere-omoda {
+    background: linear-gradient(180deg, #120f24 0%, #2d1f4f 55%, #8a3a78 100%);
+  }
+  .atmosphere-ora {
+    background: linear-gradient(180deg, #fbe9e4 0%, #efe1f2 55%, #f8efe6 100%);
+  }
+
+  /* Hero art direction: keeps text legible on the right without darkening the car. */
+  .hero-scrim {
+    background: linear-gradient(
+      to left,
+      rgb(250 248 244 / 0.94) 0%,
+      rgb(250 248 244 / 0.82) 28%,
+      rgb(250 248 244 / 0) 58%
+    );
+  }
+  @media (max-width: 63.99rem) {
+    .hero-scrim {
+      background: linear-gradient(
+        to bottom,
+        rgb(250 248 244 / 0.95) 0%,
+        rgb(250 248 244 / 0.85) 38%,
+        rgb(250 248 244 / 0) 62%
+      );
+    }
   }
 }
 
