@@ -15,6 +15,10 @@ export type BrandSlug = "hyundai" | "mitsubishi" | "jaecoo" | "omoda" | "ora";
 export interface ImageAsset {
   src: string;
   alt: string;
+  /** Text (caption, logo, CTA) is baked into the image — don't repeat it on top. */
+  includesText?: boolean;
+  /** Show only part of the file (CSS aspect-ratio + object-position), e.g. to trim a bad crop. */
+  frame?: { aspectRatio: string; objectPosition: string };
 }
 
 export interface Brand {

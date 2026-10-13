@@ -8,7 +8,7 @@ import { NavDropdown } from "./NavDropdown";
 import { NavLink } from "./NavLink";
 
 const navItemClass =
-  "relative inline-flex min-h-11 items-center px-2.5 text-[0.9375rem] font-medium text-ink transition-colors hover:text-forest-700 aria-[current=page]:text-forest-700 data-[active]:text-forest-700 2xl:px-3.5";
+  "relative inline-flex min-h-11 items-center px-2.5 text-base font-semibold text-ink transition-colors hover:text-forest-700 aria-[current=page]:text-forest-700 data-[active]:text-forest-700 2xl:px-3.5";
 
 /** Sticky white header: on long pages the test-drive CTA stays one tap away. */
 export function Header() {

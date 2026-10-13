@@ -1,5 +1,34 @@
 # Assets: what to supply and where to put it
 
+## Current state: prototype assets (commit 8750be7)
+
+The homepage currently uses prototype crops of the approved mockup, which are
+approved for prototype use only. They are mapped explicitly in
+`src/content/assets.ts`, and that file takes priority over the conventions
+below.
+
+| File | Used for | Notes |
+| --- | --- | --- |
+| `images/logos/autoran-logo-preview.png` (149×54) | Header logo | Blended into the white header |
+| `images/logos/autoran-footer-logo-preview.png` (175×73) | Footer logo | The crop cuts the subtitle in half. It is framed to show the wordmark only |
+| `images/hero/hero-tucson-car-preview.jpg` (625×341) | Hero, Tucson slide | The "HYUNDAI TUCSON / עוצמה בכל דרך" caption is baked in, so the page caption is hidden |
+| `images/brands/<brand>-tile-preview.jpg` (186×226) | Brand tiles | Complete tile renders with logo, tagline and CTA baked in. The page text is screen-reader only |
+| `images/cars/{jaecoo-7,tucson,ora-5}-card-preview.jpg` (~313×141) | Popular-model cards | |
+| `images/sections/next-steps-car-left-preview.jpg` (270×197) | "איך תרצו להתקדם?" decorative photo (desktop only) | |
+| `images/hero/hero-tucson-mockup-full.jpg` | **Not used** | Headline and buttons are baked in. Reference only |
+| `images/sections/next-steps-mockup.jpg` | **Not used** | Screenshot of the whole section. Reference only |
+
+The two unused files are still published under `/public`. Consider moving them
+to `docs/design/`.
+
+**To switch to production files:** add them at the convention paths below,
+then delete the matching `prototype` entry in `src/content/assets.ts`.
+Production files never override prototype files automatically. Note that the
+production brand tiles should be **photos only**, since the page draws the
+logo, tagline and CTA.
+
+---
+
 The homepage is wired to show authorised files automatically. Copy a file to
 the path below and rebuild (`npm run build`), or redeploy. No code change is
 needed. Any of `.avif .webp .jpg .jpeg .png .svg` works. If both exist, the

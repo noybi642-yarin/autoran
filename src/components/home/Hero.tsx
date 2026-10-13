@@ -18,15 +18,18 @@ export function Hero() {
         name,
         brandName: brand.name,
         tagline: vehicle.tagline,
-        image: getVehicleImage(slug, "hero", name),
+        image: getVehicleImage(slug, "hero", vehicle.tagline ? `${name} — ${vehicle.tagline}` : name),
         brandLogo: getBrandLogo(brand.slug, brand.name),
       },
     ];
   });
 
+  // Only vehicles with a hero photo join the carousel; placeholders are a last resort.
+  const withPhotos = slides.filter((slide) => slide.image);
+
   return (
-    <section aria-labelledby="hero-title">
-      <HeroCarousel slides={slides}>
+    <section aria-labelledby="hero-title" className="bg-white">
+      <HeroCarousel slides={withPhotos.length > 0 ? withPhotos : slides}>
         <div className="max-w-[34rem]">
           <h1
             id="hero-title"

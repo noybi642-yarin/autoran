@@ -29,7 +29,7 @@
   --color-forest-700: #0f6149; /* primary action — 7.4:1 with white */
   --color-forest-800: #0b4c3a;
   --color-forest-900: #083a2c;
-  --color-forest-950: #052219;
+  --color-forest-950: #01231e; /* footer green, sampled from the approved design */
 
   /* Focus ring */
   --color-focus: #157a5d;
@@ -92,7 +92,7 @@
   }
   @media (min-width: 64rem) {
     :root {
-      --header-h: 5rem;
+      --header-h: 5.25rem;
     }
   }
 
@@ -159,24 +159,15 @@
     background: linear-gradient(180deg, #fbe9e4 0%, #efe1f2 55%, #f8efe6 100%);
   }
 
-  /* Hero art direction: keeps text legible on the right without darkening the car. */
+  /* Hero art direction (desktop): calm the headline side without darkening the car. */
   .hero-scrim {
     background: linear-gradient(
       to left,
-      rgb(250 248 244 / 0.94) 0%,
-      rgb(250 248 244 / 0.82) 28%,
-      rgb(250 248 244 / 0) 58%
+      rgb(250 251 251 / 0.96) 0%,
+      rgb(250 251 251 / 0.88) 28%,
+      rgb(250 251 251 / 0.4) 40%,
+      rgb(250 251 251 / 0) 50%
     );
-  }
-  @media (max-width: 63.99rem) {
-    .hero-scrim {
-      background: linear-gradient(
-        to bottom,
-        rgb(250 248 244 / 0.95) 0%,
-        rgb(250 248 244 / 0.85) 38%,
-        rgb(250 248 244 / 0) 62%
-      );
-    }
   }
 }
 

@@ -37,16 +37,17 @@ export function PurchaseOptions() {
   return (
     <section
       aria-labelledby="purchase-title"
-      className="relative isolate overflow-hidden bg-[#f1f1ef] py-10 lg:py-14"
+      className="relative isolate overflow-hidden bg-[#f1f4f5] py-10 lg:py-14"
     >
       {background && (
-        <div aria-hidden="true" className="absolute inset-y-0 end-0 -z-10 hidden w-[34%] lg:block">
-          <Photo image={background} placeholderLabel="" sizes="34vw" position="0% 50%" />
-          <div className="absolute inset-0 bg-gradient-to-l from-[#f1f1ef] via-[#f1f1ef]/40 to-transparent" />
+        <div aria-hidden="true" className="absolute inset-y-0 end-0 -z-10 hidden w-[27%] lg:block">
+          <Photo image={background} placeholderLabel="" sizes="27vw" position="0% 50%" />
+          {/* Fade the photo's inner edge into the section background. */}
+          <div className="absolute inset-0 bg-gradient-to-l from-[#f1f4f5] via-[#f1f4f5]/0 via-35% to-transparent" />
         </div>
       )}
       <Container>
-        <div className={cx(background && "lg:max-w-[74%]")}>
+        <div className={cx(background && "lg:ms-0 lg:max-w-[75%]")}>
           <h2 id="purchase-title" className="text-headline font-extrabold text-forest-950">
             איך תרצו להתקדם?
           </h2>

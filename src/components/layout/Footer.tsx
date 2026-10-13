@@ -17,7 +17,7 @@ const linkClass = "inline-flex min-h-9 items-center text-forest-100 transition-c
 /** Business hours and social links are intentionally absent until verified. */
 export function Footer() {
   return (
-    <footer className="on-dark bg-forest-900 text-forest-100">
+    <footer className="on-dark bg-forest-950 text-forest-100">
       <Container className="py-10 lg:py-12">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-4">

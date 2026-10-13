@@ -34,6 +34,29 @@ export function BrandsSection() {
             const dark = brand.tileTone === "dark";
             const logo = getBrandLogo(brand.slug, brand.name);
             const tile = getBrandTile(brand.slug, `${brand.name} — רכבי המותג`);
+            // Prototype tiles are complete renders (logo, tagline, CTA baked in).
+            if (tile?.includesText) {
+              return (
+                <li key={brand.slug} className="snap-start">
+                  <Link
+                    href={`/brands/${brand.slug}`}
+                    className="group relative block aspect-[186/226] overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)]"
+                  >
+                    {/* Slight overscan hides the crop's light edge and corner pixels. */}
+                    <Image
+                      src={tile.src}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 38vw, 62vw"
+                      className="scale-[1.045] object-cover transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.08]"
+                    />
+                    <span className="sr-only">
+                      {brand.name} — {brand.tagline}. לכל הדגמים
+                    </span>
+                  </Link>
+                </li>
+              );
+            }
             return (
               <li key={brand.slug} className="snap-start">
                 <Link

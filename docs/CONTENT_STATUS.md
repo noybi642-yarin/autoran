@@ -10,22 +10,31 @@ domains. Business details were therefore taken from search-index copies of
 autoran.co.il pages and cross-checked against importer dealer listings and
 directories (October 2026).
 
-## Assets needed from AUTORAN
+## Assets
 
-The full spec and drop-in paths are in [`ASSETS.md`](ASSETS.md).
+Prototype assets cropped from the approved mockup were integrated in commit
+8750be7. Mapping and specs are in [`ASSETS.md`](ASSETS.md).
 
 | Item | State |
 | --- | --- |
-| **Original AUTORAN logo** (SVG) | **Missing.** The only copy is inside the mockup, about 170 px wide, which is too small to use |
-| Hero photos: Tucson, JAECOO 7, ORA 5 | Missing. Labelled placeholders are shown |
-| Card photos for the same three models | Missing. The hero photo is used if a card photo is absent |
-| Five official brand logos plus five brand tile photos | Missing. Brand names are shown as text over a colour background |
-| Favicon from the logo (`src/app/icon.png`) | Missing |
-| Approved homepage design | ✅ Received: `docs/design/homepage-reference.png` |
+| AUTORAN logo, header | ✅ Prototype crop (149×54, not transparent). **Production needs the original vector/SVG** |
+| AUTORAN logo, footer | ⚠️ Prototype crop cuts the "מרכז מכירה ושירות" subtitle, so only the wordmark is shown. Needs a light/white version of the original logo |
+| Hero: Hyundai Tucson | ✅ Prototype crop (625×341, upscaled to about 950 px on desktop, so slightly soft) |
+| Hero: JAECOO 7 and ORA 5 | ❌ **Missing.** The carousel shows only Tucson, without arrows or dots, until these exist |
+| Brand tiles (5) | ✅ Prototype crops (186×226, shown at about 250 px). Taglines are baked in exactly as in the mockup, including the misspelt Mitsubishi/OMODA lines (see below) |
+| Model cards: JAECOO 7, Tucson, ORA 5 | ✅ Prototype crops (~313×141, shown at about 400 px) |
+| "איך תרצו להתקדם?" photo | ✅ Prototype crop |
+| Separate official brand logos | Not needed while the tiles are complete renders. Needed for production tiles |
+| Favicon from the logo (`src/app/icon.png`) | ❌ Missing |
+| Approved homepage design | ✅ `docs/design/homepage-reference.png` |
+
+**Usage rights:** the vehicle images in the mockup crops are design renders,
+not official photography. They are approved for the prototype only and must be
+replaced with authorised importer imagery before launch.
 
 | Asset | Source / licence |
 | --- | --- |
-| (none yet) | |
+| `public/images/**` | Cropped from the approved mockup. Prototype use only (owner approval, October 2026) |
 
 ## Locations (shown on the homepage, `verification: "pending"`)
 
@@ -64,8 +73,10 @@ J7 / J8". Please confirm the official Israeli model names.
 ## Copy (from the approved design; spelling corrected where needed)
 
 - Hero: "הרכב הבא שלכם מתחיל כאן" / "מגוון מותגים, דגמים ופתרונות רכישה במקום אחד."
-- Brand taglines in `src/content/brands.ts`. Two lines in the mockup were
-  garbled, so I corrected them:
+- Brand taglines in `src/content/brands.ts`. With the prototype tiles, the
+  **visible** taglines are the ones baked into the images, and two of those are
+  misspelt. The corrected versions below are used for screen readers and will
+  show on the page once production photo-only tiles arrive:
   - Mitsubishi: "אמינות שבילה קדימה" became "אמינות שמובילה קדימה".
   - OMODA: "עיצוב הדשנות" became "עיצוב וחדשנות".
   - JAECOO: "לאנשים שאוהבים יותר" became "לאלה שמחפשים יותר".

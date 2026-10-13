@@ -30,7 +30,7 @@ export function FeaturedVehicles() {
             return (
               <li key={vehicle.slug}>
                 <article className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line/80 bg-white shadow-[var(--shadow-card)] transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)]">
-                  <div className="relative aspect-[2/1] overflow-hidden">
+                  <div className="relative aspect-[9/4] overflow-hidden">
                     <Photo
                       image={getVehicleImage(vehicle.slug, "card", name)}
                       placeholderLabel={name}
