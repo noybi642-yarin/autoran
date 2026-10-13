@@ -171,6 +171,13 @@
   }
 }
 
+/* Smooth in-page anchor scrolling, only for users who haven't asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Respect users who prefer reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -8,16 +8,37 @@ import type { BrandSlug, Vehicle } from "./types";
  * the approved homepage design. Imagery is resolved from /public by slug —
  * see src/content/assets.ts.
  */
+/**
+ * Hyundai line-up: model names as listed on Hyundai Israel's 2026 range page
+ * (hyundaimotors.co.il/future-2026, read via search index, October 2026 — the
+ * site itself was not reachable from the build environment). Every entry stays
+ * `pending` until the client confirms the current Israeli catalogue.
+ * IONIQ 9 is listed there as "coming soon" and is deliberately not included.
+ */
+const hyundai = (slug: string, model: string, extra: Partial<Vehicle> = {}): Vehicle => ({
+  slug: `hyundai-${slug}`,
+  brand: "hyundai",
+  model,
+  verification: "pending",
+  intro: null,
+  soldAt: ["herzliya-hyundai"],
+  ...extra,
+});
+
 export const vehicles: Vehicle[] = [
-  {
-    slug: "hyundai-tucson",
-    brand: "hyundai",
-    model: "Tucson",
-    tagline: "עוצמה בכל דרך",
-    verification: "pending",
-    intro: null,
-    soldAt: ["herzliya-hyundai"],
-  },
+  // First: the approved homepage/hero model. Listed by the importer as "Tucson Hybrid";
+  // the approved design uses "Tucson".
+  hyundai("tucson", "Tucson", { tagline: "עוצמה בכל דרך" }),
+  hyundai("venue", "Venue"),
+  hyundai("kona-hybrid", "Kona Hybrid"),
+  hyundai("kona-electric", "Kona Electric"),
+  hyundai("santa-fe-hybrid", "Santa Fe Hybrid"),
+  hyundai("palisade-hybrid", "Palisade Hybrid"),
+  hyundai("elantra", "Elantra"),
+  hyundai("sonata", "Sonata"),
+  hyundai("ioniq-5", "IONIQ 5"),
+  hyundai("ioniq-5-n", "IONIQ 5 N"),
+  hyundai("ioniq-6", "IONIQ 6"),
   {
     slug: "mitsubishi-outlander",
     brand: "mitsubishi",

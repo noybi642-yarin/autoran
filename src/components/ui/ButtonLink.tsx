@@ -6,7 +6,7 @@ type Variant = "primary" | "secondary" | "ghost" | "inverse";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-control)] font-semibold whitespace-nowrap transition-[background-color,color,border-color,box-shadow,transform] duration-200 ease-[var(--ease-out-soft)] active:translate-y-px";
+  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-control)] font-semibold transition-[background-color,color,border-color,box-shadow,transform] duration-200 ease-[var(--ease-out-soft)] active:translate-y-px";
 
 const variants: Record<Variant, string> = {
   primary: "bg-forest-700 text-white hover:bg-forest-800",
@@ -25,14 +25,22 @@ const sizes: Record<Size, string> = {
 type ButtonLinkProps = ComponentProps<typeof Link> & {
   variant?: Variant;
   size?: Size;
+  /** Allow the label to wrap (long labels in narrow containers). */
+  wrap?: boolean;
 };
 
 /** A link styled as a button. All CTAs on the site are navigations, not actions. */
 export function ButtonLink({
   variant = "primary",
   size = "md",
+  wrap = false,
   className,
   ...props
 }: ButtonLinkProps) {
-  return <Link className={cx(base, variants[variant], sizes[size], className)} {...props} />;
+  return (
+    <Link
+      className={cx(base, wrap ? "text-center" : "whitespace-nowrap", variants[variant], sizes[size], className)}
+      {...props}
+    />
+  );
 }

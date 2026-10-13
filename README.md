@@ -48,10 +48,14 @@ src/
     vehicles.ts           Vehicle catalog (no specs until verified)
     locations.ts          Showrooms + service centre, link helpers
     legal.ts              Accessibility / privacy / terms / cookie pages
+    brand-pages.ts        Per-brand page config: theme, hero copy, catalog, showrooms
     assets.ts             Asset path conventions + build-time resolver
   components/
     layout/               Header, NavDropdown, MobileMenu, NavLink, Footer, SkipLink
     home/                 Homepage sections (hero carousel, brands, models…)
+    brand-page/           Brand page building blocks: BrandHero, VehicleCatalog,
+                          VehicleCard, BenefitSection, BrandContactCta,
+                          BrandLocation, BrandThemeScope (per-brand CSS vars)
     ui/                   Container, ButtonLink, SectionHeader, Photo
     brand/Logo.tsx        Original logo slot
     seo/JsonLd.tsx        Safe JSON-LD script
@@ -89,7 +93,7 @@ Google Sheets credentials arrive in Phase 1F (server-side only).
 | --- | --- | --- |
 | 1A | Architecture, tokens, typography, RTL, header, footer | ✅ Ready for review |
 | 1B | Homepage, rebuilt to the approved design (`docs/design/`) | ✅ Ready for review. Waiting on assets |
-| 1C | Brand pages | Not started — awaits homepage approval |
+| 1C | Brand pages | 🟡 Hyundai (`/brands/hyundai`) ready for review. Mitsubishi, JAECOO, OMODA and ORA not started |
 | 1D | Vehicle detail template | Not started |
 | 1E | Financing, trade-in, test drive, service, locations pages | Not started |
 | 1F | Forms + Google Sheets | Not started |

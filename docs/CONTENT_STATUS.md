@@ -53,14 +53,32 @@ in another. Please supply the official hours for each location.
 Only model names are entered. There are no specifications, prices, trims,
 offers or availability.
 
+### Hyundai line-up (shown on `/brands/hyundai`, all `pending`)
+
+These 11 models come from Hyundai Israel's 2026 range page
+(hyundaimotors.co.il/future-2026). I read it through the search index in
+October 2026, because the site isn't reachable from the build environment.
+**Please confirm the current Israeli catalogue.**
+
+| Model | Notes |
+| --- | --- |
+| Tucson | Listed by the importer as "Tucson Hybrid". The approved homepage uses "Tucson". Which name should we use? |
+| Venue, Kona Hybrid, Kona Electric, Santa Fe Hybrid, Palisade Hybrid, Elantra, Sonata, IONIQ 5, IONIQ 5 N, IONIQ 6 | Names only. No photos yet |
+| IONIQ 9 | **Not shown.** The importer page lists it as "coming soon". Add it once availability is confirmed |
+| i10, i20, BAYON, Staria | **Not shown.** They appear only in older importer articles or dealer listings, not on the 2026 range page |
+
+The Hyundai page shows a small note under the catalog while any model is
+pending. The text is in `src/content/brand-pages.ts` (`pendingNotice`).
+Remove it once the list is confirmed.
+
+### Other brands
+
 | Model | Needs |
 | --- | --- |
-| Hyundai Tucson | Confirm it is in the current Israeli line-up. Then intro copy, highlights, specs, images |
 | Mitsubishi Outlander | Intro copy, highlights, specs, images |
-| JAECOO J5 / J7 / J8 | Confirm each is in the current Israeli catalogue, then the items above |
+| JAECOO J5 / 7 / J8 | Confirm each is in the current Israeli catalogue, then the items above |
 | OMODA 7 / OMODA 9 | Same |
 | ORA 5 | Same. Do not label it "electric" unless confirmed |
-| Hyundai line-up | Not entered yet. To be populated from verified current Israeli-market data in Phase 1C |
 
 Homepage selections (from the approved design), set in `src/content/site.ts`:
 
@@ -88,6 +106,20 @@ J7 / J8". Please confirm the official Israeli model names.
 - Locations subtitle: "מוזמנים להגיע, להתרשם ולקבל שירות אישי." This softens
   the mockup's "השירות הטוב ביותר", which is a superlative claim.
 - Footer independence notice: "אוטורן היא סוכנות רכב עצמאית…".
+
+## Hyundai brand page (`/brands/hyundai`)
+
+- **Photos:** only the Tucson has images (the hero and card crops). The other
+  10 catalog cards show a labelled placeholder. **Needed:** one card photo per
+  model, at least 1200×600 (about 2:1), saved at
+  `public/vehicles/hyundai-<model>/card.jpg`. A dedicated Hyundai hero is
+  optional, since the page currently reuses the Tucson hero.
+- **Showroom:** הרצליה פיתוח, ישעיהו ליבוביץ 7, 09-7766300, with parking at
+  הסדנאות 10. The location is still `pending` (see Locations above).
+  Opening hours are not shown.
+- **Copy:** the hero, catalog, benefits and assistance text all come from the
+  brief. The benefit lines make no promises about approval, valuation or
+  booking.
 
 ## Deliberately not copied from the mockup
 
